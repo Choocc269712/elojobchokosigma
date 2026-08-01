@@ -1,3 +1,14 @@
+const SENHAS = [
+    "choocc123",
+    "joao456"
+];
+
+const senha = prompt("Digite a senha:");
+
+if (!SENHAS.includes(senha)) {
+    alert("Senha incorreta!");
+    return;
+}
 const form = document.getElementById("form");
 
 form.onsubmit = async (e) => {
