@@ -34,25 +34,40 @@ async function atualizar() {
 
         }
 
-        cards.innerHTML += `
-            <div class="card">
-                <div class="info">
-                    <div class="label">Tempo restante</div>
-                    <div class="value">${tempo}</div>
-                </div>
 
-                <div class="info">
-                    <div class="label">Boost</div>
-                    <div class="value">${job.boost}</div>
-                </div>
+cards.innerHTML += `
+<div class="card ${diff <= 0 ? "finalizado" : ""}">
 
-                <div class="info">
-                    <div class="label">Boostando</div>
-                    <div class="value">${job.booster}</div>
-                </div>
-            </div>
-        `;
-    });
+    <div class="label">Tempo restante</div>
+    <div class="timer">${tempo}</div>
+
+    <div class="info">
+        <div class="label">Boost</div>
+        <div class="value">${job.boost}</div>
+    </div>
+
+    <div class="info">
+        <div class="label">Boostando</div>
+        <div class="value">${job.booster}</div>
+    </div>
+
+    <div class="info">
+        <div class="label">Preço</div>
+        <div class="preco">$${Number(job.preco).toFixed(2)}</div>
+    </div>
+
+    <div class="botoes">
+        <button class="botao-editar" onclick="editar(${job.id})">
+            ✏ Editar
+        </button>
+
+        <button class="botao-excluir" onclick="excluir(${job.id})">
+            🗑 Excluir
+        </button>
+    </div>
+
+</div>
+`;
 
 }
 
