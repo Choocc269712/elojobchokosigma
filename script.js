@@ -2,10 +2,10 @@ const cards = document.getElementById("cards");
 
 async function atualizar() {
 
-    const { data: jobs, error } = await supabase
-        .from("jobs")
-        .select("*")
-        .order("fim");
+const { data: jobs, error } = await db
+    .from("jobs")
+    .select("*")
+    .order("fim");
 
     if (error) {
         console.error(error);
