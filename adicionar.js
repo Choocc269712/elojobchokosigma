@@ -1,29 +1,28 @@
-const form=document.getElementById("form");
+const form = document.getElementById("form");
 
-form.onsubmit=e=>{
+form.onsubmit = async (e) => {
+    e.preventDefault();
 
-e.preventDefault();
+    const horas = parseInt(document.getElementById("horas").value);
 
-let jobs=JSON.parse(localStorage.getItem("jobs"))||[];
+    const fim = new Date();
+    fim.setHours(fim.getHours() + horas);
 
-let horas=parseInt(document.getElementById("horas").value);
+    const { error } = await db
+        .from("jobs")
+        .insert({
+            boost: document.getElementById("boost").value,
+            booster: document.getElementById("booster").value,
+            fim: fim.toISOString()
+        });
 
-let fim=new Date();
+    if (error) {
+        console.error(error);
+        alert("Erro: " + error.message);
+        return;
+    }
 
-fim.setHours(fim.getHours()+horas);
+    alert("Elojob adicionado com sucesso!");
 
-jobs.push({
-
-boost:document.getElementById("boost").value,
-
-booster:document.getElementById("booster").value,
-
-fim:fim
-
-});
-
-localStorage.setItem("jobs",JSON.stringify(jobs));
-
-location.href="index.html";
-
-}
+    window.location.href = "index.html";
+};
