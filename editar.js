@@ -39,7 +39,7 @@ form.onsubmit = async (e) => {
 
     e.preventDefault();
 
-    const senha = prompt("Digite a senha:");
+    const senha = document.getElementById("senha").value;
 
     if (!SENHAS.includes(senha)) {
         alert("Senha incorreta!");
