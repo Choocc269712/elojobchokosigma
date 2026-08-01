@@ -2,7 +2,7 @@ const cards = document.getElementById("cards");
 
 async function atualizar() {
 
-    const { data: jobs, error } = await supabase
+    const { data: jobs, error } = await db
         .from("jobs")
         .select("*")
         .order("fim");
@@ -31,6 +31,7 @@ async function atualizar() {
             const segundos = Math.floor(diff / 1000) % 60;
 
             tempo = `${horas}h ${minutos}m ${segundos}s`;
+
         }
 
         cards.innerHTML += `
