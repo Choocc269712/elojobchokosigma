@@ -9,14 +9,15 @@ form.onsubmit = async (e) => {
 
     e.preventDefault();
 
-    const senha = prompt("Digite a senha:");
+    const senha = document.getElementById("senha").value;
 
     if (!SENHAS.includes(senha)) {
         alert("Senha incorreta!");
+        document.getElementById("senha").value = "";
         return;
     }
 
-    const horas = parseInt(document.getElementById("horas").value);
+    const horas = Number(document.getElementById("horas").value);
 
     const fim = new Date();
     fim.setHours(fim.getHours() + horas);
@@ -39,5 +40,4 @@ form.onsubmit = async (e) => {
     alert("Elojob adicionado com sucesso!");
 
     window.location.href = "index.html";
-
 };
