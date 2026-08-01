@@ -25,6 +25,7 @@ form.onsubmit = async (e) => {
             boost: document.getElementById("boost").value,
             booster: document.getElementById("booster").value,
             fim: fim.toISOString()
+            preco: Number(document.getElementById("preco").value)
         });
 
     if (error) {
