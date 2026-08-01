@@ -69,6 +69,7 @@ cards.innerHTML += `
 </div>
 `;
 
+})
 }
 
 atualizar();
