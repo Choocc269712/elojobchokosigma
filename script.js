@@ -56,10 +56,17 @@ cards.innerHTML += `
         <div class="preco">$${Number(job.preco).toFixed(2)}</div>
     </div>
 
-    <div class="botoes">
-        <button class="botao-editar" onclick="editar(${job.id})">
-            ✏ Editar
-        </button>
+<div class="botoes">
+
+    <button class="botao-editar" onclick="editar(${job.id})">
+        ✏ Editar
+    </button>
+
+    <button class="botao-excluir" onclick="excluir(${job.id})">
+        🗑 Excluir
+    </button>
+
+</div>
 
         <button class="botao-excluir" onclick="excluir(${job.id})">
             🗑 Excluir
@@ -74,3 +81,27 @@ cards.innerHTML += `
 
 atualizar();
 setInterval(atualizar, 1000);
+
+function editar(id) {
+    window.location.href = `editar.html?id=${id}`;
+}
+
+async function excluir(id) {
+
+    if (!confirm("Deseja excluir este elojob?")) {
+        return;
+    }
+
+    const { error } = await db
+        .from("jobs")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        alert("Erro ao excluir.");
+        console.error(error);
+        return;
+    }
+
+    atualizar();
+}
