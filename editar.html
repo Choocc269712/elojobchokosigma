@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Elojob</title>
+
+    <link rel="stylesheet" href="adicionar.css">
+
+</head>
+
+<body>
+
+    <form id="form">
+
+        <h1>Editar Elojob</h1>
+
+        <input
+            id="boost"
+            placeholder="Ex: D4 → M1"
+            required>
+
+        <input
+            id="booster"
+            placeholder="Booster"
+            required>
+
+        <input
+            type="number"
+            step="0.01"
+            id="preco"
+            placeholder="Preço (USD)"
+            required>
+
+        <input
+            type="number"
+            id="horas"
+            placeholder="Horas Restantes"
+            required>
+
+            <input
+    type="password"
+    id="senha"
+    placeholder="Senha"
+    required>
+
+        <button type="submit">
+            Salvar Alterações
+        </button>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="editar.js"></script>
+
+</body>
+
+</html>
