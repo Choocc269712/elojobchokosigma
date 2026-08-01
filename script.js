@@ -1,1 +1,2 @@
-alert("script.js carregou!");
+console.log("Teste");
+alert(typeof window.supabase);
