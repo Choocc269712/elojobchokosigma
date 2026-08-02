@@ -41,3 +41,28 @@ form.onsubmit = async (e) => {
 
     window.location.href = "index.html";
 };
+
+const tagInput = document.getElementById("tag");
+
+tagInput.addEventListener("input", () => {
+
+    const tag = tagInput.value.trim();
+
+    if (tag.length < 5) {
+
+        document.getElementById("player-info").style.display = "none";
+        return;
+
+    }
+
+    document.getElementById("player-name").textContent = "Joãozinho";
+
+    document.getElementById("player-trophies").textContent = "31.245";
+
+    document.getElementById("player-club").textContent = "Lunars";
+
+    document.getElementById("player-level").textContent = "198";
+
+    document.getElementById("player-info").style.display = "block";
+
+});

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="adicionar.css">
+    <title>Novo Elojob</title>
+
+    <link rel="stylesheet" href="adicionar.css">
 
 </head>
 
@@ -13,41 +16,70 @@
 
 <form id="form">
 
-<h1>Novo Elojob</h1>
-
-<input
-placeholder="Ex: L1 -> M1"
-id="boost"
-required>
-
-<input
-placeholder="Booster"
-id="booster"
-required>
-
-<input
-type="number"
-step="0.01"
-placeholder="Preço (USD)"
-id="preco"
-required>
-
-<input
-type="number"
-placeholder="Horas"
-id="horas"
-required>
-<button>
+    <h1>Novo Elojob</h1>
 
     <input
-    type="password"
-    id="senha"
-    placeholder="Senha"
-    required>
+        id="boost"
+        placeholder="Ex: L1 → M1"
+        required>
 
-Adicionar
+    <input
+        id="booster"
+        placeholder="Booster"
+        required>
 
-</button>
+    <input
+        id="tag"
+        placeholder="Tag do Cliente (Ex: #2ABCDEF)"
+        required>
+
+    <!-- Card do jogador -->
+    <div id="player-info" class="player-info" style="display:none;">
+
+        <h3>Cliente encontrado!</h3>
+
+        <div class="player-item">
+            👤 <span id="player-name"></span>
+        </div>
+
+        <div class="player-item">
+            🏆 <span id="player-trophies"></span>
+        </div>
+
+        <div class="player-item">
+            🏰 <span id="player-club"></span>
+        </div>
+
+        <div class="player-item">
+            ⭐ Nível <span id="player-level"></span>
+        </div>
+
+    </div>
+
+    <input
+        type="number"
+        step="0.01"
+        id="preco"
+        placeholder="Preço (USD)"
+        required>
+
+    <input
+        type="number"
+        id="horas"
+        placeholder="Horas"
+        required>
+
+    <input
+        type="password"
+        id="senha"
+        placeholder="Senha"
+        required>
+
+    <button type="submit">
+
+        Adicionar
+
+    </button>
 
 </form>
 
@@ -56,4 +88,5 @@ Adicionar
 <script src="adicionar.js"></script>
 
 </body>
+
 </html>
