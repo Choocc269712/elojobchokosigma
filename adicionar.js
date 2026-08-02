@@ -64,7 +64,7 @@ const tagInput = document.getElementById("tag");
 
 tagInput.addEventListener("input", async () => {
 
-    const tag = tagInput.value.trim().replace("#", "");
+    const tag = tagInput.value
 
     if (tag.length < 3) {
 
