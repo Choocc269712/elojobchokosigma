@@ -63,20 +63,37 @@ tagInput.addEventListener("input", async () => {
             throw new Error("Jogador não encontrado");
         }
 
-        const player = await resposta.json();
+const { error } = await db
+.from("jobs")
+.insert({
 
-        document.getElementById("player-name").textContent = player.name;
+    boost: document.getElementById("boost").value,
 
-        document.getElementById("player-trophies").textContent =
-            player.trophies.toLocaleString("pt-BR");
+    booster: document.getElementById("booster").value,
 
-        document.getElementById("player-club").textContent =
-            player.club ? player.club.name : "Sem clube";
+    preco: Number(document.getElementById("preco").value),
 
-        document.getElementById("player-level").textContent =
-            player.expLevel;
+    fim: fim.toISOString(),
 
-        document.getElementById("player-info").style.display = "block";
+    player_name: player.name,
+
+    player_trophies: player.trophies,
+
+    player_level: player.expLevel,
+
+    player_club: player.club?.name ?? "Sem clube",
+
+    ranked_rank: player.rankedRankName.default,
+
+    ranked_elo: player.rankedElo,
+
+    highest_rank: player.highestAllTimeRankedRankName.default,
+
+    player_icon: player.icon.id,
+
+    name_color: player.nameColor
+
+});
 
     } catch (e) {
 
