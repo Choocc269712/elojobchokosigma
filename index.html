@@ -6,11 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EloJobs Dashboard</title>
+    <title>Lunars Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
@@ -21,17 +22,21 @@
 
     <div>
 
-        <h1>🎮 EloJobs Dashboard</h1>
+        <h1>🏆 Lunars Dashboard</h1>
 
-        <p>Gerencie todos os boosts em tempo real.</p>
+        <p>Painel de gerenciamento de EloJobs.</p>
 
     </div>
 
-    <a href="adicionar.html" class="btn">
+    <div class="header-buttons">
 
-        + Novo Elojob
+        <a href="adicionar.html" class="btn">
 
-    </a>
+            + Novo Elojob
+
+        </a>
+
+    </div>
 
 </header>
 
@@ -39,7 +44,7 @@
 
     <div class="box">
 
-        <span>Elojobs Ativos</span>
+        <span>📋 Elojobs Ativos</span>
 
         <h2 id="ativos">0</h2>
 
@@ -47,7 +52,7 @@
 
     <div class="box">
 
-        <span>Valor Total</span>
+        <span>💰 Valor Total</span>
 
         <h2 id="valor">$0.00</h2>
 
@@ -55,7 +60,7 @@
 
     <div class="box">
 
-        <span>Boosters</span>
+        <span>👥 Boosters Online</span>
 
         <h2 id="boosters">0</h2>
 
@@ -63,7 +68,7 @@
 
     <div class="box">
 
-        <span>Finalizados</span>
+        <span>✅ Finalizados</span>
 
         <h2 id="finalizados">0</h2>
 
@@ -71,15 +76,40 @@
 
 </section>
 
-<input
-id="pesquisa"
-type="text"
-placeholder="🔍 Pesquisar boost ou booster...">
+<section class="filtros">
 
-<div id="cards"></div>
+    <input
+        id="pesquisa"
+        type="text"
+        placeholder="🔍 Pesquisar por booster, boost ou rank...">
+
+    <select id="filtro-rank">
+
+        <option value="">Todos os Ranks</option>
+
+        <option>Bronze</option>
+        <option>Prata</option>
+        <option>Ouro</option>
+        <option>Diamante</option>
+        <option>Mítico</option>
+        <option>Lendário</option>
+        <option>Mestre</option>
+        <option>Pro</option>
+
+    </select>
+
+</section>
+
+<div id="cards">
+
+    <!-- Os cards serão adicionados pelo script.js -->
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
+
 <script src="script.js"></script>
 
 </body>

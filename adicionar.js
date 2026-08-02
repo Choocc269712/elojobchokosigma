@@ -5,6 +5,8 @@ const SENHAS = [
     "joao456"
 ];
 
+let player = null;
+
 form.onsubmit = async (e) => {
 
     e.preventDefault();
@@ -17,6 +19,11 @@ form.onsubmit = async (e) => {
         return;
     }
 
+    if (!player) {
+        alert("Busque um jogador válido primeiro.");
+        return;
+    }
+
     const horas = Number(document.getElementById("horas").value);
 
     const fim = new Date();
@@ -25,15 +32,26 @@ form.onsubmit = async (e) => {
     const { error } = await db
         .from("jobs")
         .insert({
+
             boost: document.getElementById("boost").value,
+
             booster: document.getElementById("booster").value,
+
             preco: Number(document.getElementById("preco").value),
-            fim: fim.toISOString()
+
+            fim: fim.toISOString(),
+
+            ranked_rank: player.rankedRankName?.default ?? "Sem Ranked",
+
+            ranked_elo: player.rankedElo ?? 0,
+
+            highest_rank: player.highestAllTimeRankedRankName?.default ?? "Sem Ranked"
+
         });
 
     if (error) {
         console.error(error);
-        alert("Erro ao adicionar o elojob:\n" + error.message);
+        alert(error.message);
         return;
     }
 
@@ -51,6 +69,7 @@ tagInput.addEventListener("input", async () => {
     if (tag.length < 3) {
 
         document.getElementById("player-info").style.display = "none";
+        player = null;
         return;
 
     }
@@ -63,41 +82,27 @@ tagInput.addEventListener("input", async () => {
             throw new Error("Jogador não encontrado");
         }
 
-const { error } = await db
-.from("jobs")
-.insert({
+        player = await resposta.json();
 
-    boost: document.getElementById("boost").value,
+        document.getElementById("player-name").textContent =
+            player.rankedRankName?.default ?? "Sem Ranked";
 
-    booster: document.getElementById("booster").value,
+        document.getElementById("player-trophies").textContent =
+            `${player.rankedElo?.toLocaleString("pt-BR") ?? 0} Elo`;
 
-    preco: Number(document.getElementById("preco").value),
+        document.getElementById("player-club").textContent =
+            player.highestSeasonRankedRankName?.default ?? "Sem temporada";
 
-    fim: fim.toISOString(),
+        document.getElementById("player-level").textContent =
+            player.highestAllTimeRankedRankName?.default ?? "Sem histórico";
 
-    player_name: player.name,
-
-    player_trophies: player.trophies,
-
-    player_level: player.expLevel,
-
-    player_club: player.club?.name ?? "Sem clube",
-
-    ranked_rank: player.rankedRankName.default,
-
-    ranked_elo: player.rankedElo,
-
-    highest_rank: player.highestAllTimeRankedRankName.default,
-
-    player_icon: player.icon.id,
-
-    name_color: player.nameColor
-
-});
+        document.getElementById("player-info").style.display = "block";
 
     } catch (e) {
 
         console.error(e);
+
+        player = null;
 
         document.getElementById("player-info").style.display = "none";
 
