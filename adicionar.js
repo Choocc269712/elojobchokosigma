@@ -44,25 +44,46 @@ form.onsubmit = async (e) => {
 
 const tagInput = document.getElementById("tag");
 
-tagInput.addEventListener("input", () => {
+tagInput.addEventListener("input", async () => {
 
-    const tag = tagInput.value.trim();
+    const tag = tagInput.value.trim().replace("#", "");
 
-    if (tag.length < 5) {
+    if (tag.length < 3) {
 
         document.getElementById("player-info").style.display = "none";
         return;
 
     }
 
-    document.getElementById("player-name").textContent = "Joãozinho";
+    try {
 
-    document.getElementById("player-trophies").textContent = "31.245";
+        const resposta = await fetch(`/api/player?tag=${tag}`);
 
-    document.getElementById("player-club").textContent = "Lunars";
+        if (!resposta.ok) {
+            throw new Error("Jogador não encontrado");
+        }
 
-    document.getElementById("player-level").textContent = "198";
+        const player = await resposta.json();
 
-    document.getElementById("player-info").style.display = "block";
+        document.getElementById("player-name").textContent = player.name;
+
+        document.getElementById("player-trophies").textContent =
+            player.trophies.toLocaleString("pt-BR");
+
+        document.getElementById("player-club").textContent =
+            player.club ? player.club.name : "Sem clube";
+
+        document.getElementById("player-level").textContent =
+            player.expLevel;
+
+        document.getElementById("player-info").style.display = "block";
+
+    } catch (e) {
+
+        console.error(e);
+
+        document.getElementById("player-info").style.display = "none";
+
+    }
 
 });
