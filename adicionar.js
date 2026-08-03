@@ -45,7 +45,7 @@ form.onsubmit = async (e) => {
 
             ranked_elo: player.rankedElo ?? 0,
 
-            highest_rank: player.highestAllTimeRankedRankName?.default ?? "Sem Ranked"
+            highest_rank: player.highestAllTimeRankedRankName?.default ?? "Sem histórico"
 
         });
 
@@ -58,37 +58,40 @@ form.onsubmit = async (e) => {
     alert("Elojob adicionado com sucesso!");
 
     window.location.href = "index.html";
+
 };
 
 const tagInput = document.getElementById("tag");
 
 tagInput.addEventListener("input", async () => {
 
-    const tag = tagInput.value
+    const tag = tagInput.value.trim();
 
-    if (tag.length < 3) {
+    if (tag.length < 2) {
 
-        document.getElementById("player-info").style.display = "none";
         player = null;
+        document.getElementById("player-info").style.display = "none";
         return;
 
     }
 
     try {
 
-        const resposta = await fetch(`/api/player?tag=${tag}`);
+        const resposta = await fetch(`/api/player?tag=${encodeURIComponent(tag)}`);
+
+        const dados = await resposta.json();
 
         if (!resposta.ok) {
-            throw new Error("Jogador não encontrado");
+            throw new Error(dados.reason || "Jogador não encontrado");
         }
 
-        player = await resposta.json();
+        player = dados;
 
         document.getElementById("player-name").textContent =
             player.rankedRankName?.default ?? "Sem Ranked";
 
         document.getElementById("player-trophies").textContent =
-            `${player.rankedElo?.toLocaleString("pt-BR") ?? 0} Elo`;
+            `${(player.rankedElo ?? 0).toLocaleString("pt-BR")} Elo`;
 
         document.getElementById("player-club").textContent =
             player.highestSeasonRankedRankName?.default ?? "Sem temporada";
@@ -98,9 +101,9 @@ tagInput.addEventListener("input", async () => {
 
         document.getElementById("player-info").style.display = "block";
 
-    } catch (e) {
+    } catch (err) {
 
-        console.error(e);
+        console.error(err);
 
         player = null;
 
